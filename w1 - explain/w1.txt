@@ -1,0 +1,196 @@
+1.classes:
+
+A class is a template/blue print that describes the behaviors/states of the objects created from it.
+
+example :
+public class Person{
+	private String name;
+	private String sex;
+	private String age;
+
+	pubic void setName(final String name){
+	this.name = name;
+	}
+
+	public String getName(){
+	return this.name;
+	}
+}
+
+Here person is a class which has private properties like name,sex and age and these can be accessed(read/set) using the pulic getters and setters.
+To create an object of the person we simply have to call "Person p = new Person();" which creates the instance of the Person class 
+and store it in a variable called p.
+
+2.Interfaces
+
+An interface conatins/groups all the realted behaviours of a class with no implementation(i.e empty bodies)
+
+example :
+public interface flyable{
+
+	void makeItFly();
+	void makeItHover();
+}
+
+Now this flyable interface ensures that the class which implements it must also define the method makeItFly.
+
+public class Bird implements flyable{
+
+	public void makeItFly(){
+	/** some code to make the bird fly **/
+	}
+	
+	public void makeItHover(){
+	/** some code to make the bird Hover **/
+	}
+}
+
+Here the Flyable interface groups the two behaiours of flying (either fly or just hover over the ground). The bird object
+can call either of the method on itself to perform required action.
+
+
+3.Encapsulation
+
+Encapsulation is the way in which the fields in a class are made private and access to the fields are given
+via public methods to the outside world.
+
+Three keywords that are used are:
+public: anyone can access the given property or method.
+protected: only sublclasses can access the given property or method.
+private: the methods or the property can only be accessed from within the class.
+default: anyone from same package can access the given property/method.
+
+Encapsulation is also termed as data hiding as it hides the access of the private fileds from outside access and hence
+also protecting the data from unwanted modification by outside world.
+
+it also helps in changing the part of code without modyfying/affecting other part of code.
+one of the best design is "encapsulating whatever changes" into one class.
+
+example :
+in the above Person class we can see that the name,sex,age are encapsulated property specific to the class called Person
+and can only be accessed though the given public setters and getter method.
+
+4.Abstraction:
+Abstraction is of two types in java:
+Abstraction on class level
+Abstraction on method level
+
+Abstraction ensures that the class cannot be instantiated. hence it only makes sense if its extended by any subclass.
+It is mostly used while designing basic classes when you know that something has to be implemented but you are not 
+sure how it is to be implemented.
+
+example:
+public abstract class Vechile(){
+	private String color;
+	public void setColor(final String color){
+	this.color = color;
+	}
+	public abstract void start();
+	public abstract void stop();
+}
+
+public class car extends Vechile(){
+	public void start(){
+	/** defines particular way of starting a car **/
+	}
+	public void stop(){
+	/** defines particular way of stopping a car **/
+	}
+}
+
+public class bike extends Vechile(){
+	public void start(){
+	/** defines particular way of starting a bike **/
+	}
+	public void stop(){
+	/** defines particular way of stopping a bike **/
+	}
+}
+
+here when we write vechile class we know that it has to contain start and stop method.
+but since every other vechile has its own implementations of starting and stoping , we leave it to the 
+subclass to implement it but at the same time ensure that the subclass must implement it by making it 
+abstract. Also if any of the method in a class is abstract the class also has to be an abstract class.
+
+Also since we cannot instantiate a direct abstract class, it thorws error when we will try to run the following:
+Vechile v = new Vechile();
+
+8.Association
+Association is a realtionship between two classes. it can be one to one, one to many , many to many and many to one.
+association is generally denoted by  "---------->"
+
+example:
+
+public class college{
+	private List<Teacher> teacherList;
+	private List<Student> studentList;
+	private Principal principal;
+	private TrusteeGroup trusteeGroup;
+	private University subscribedToUniversity;
+}
+ 
+here a college can have many students,teachers( one to many ). college can have only one principal and consequently one principal can be assigned
+to one college (one to one). Many college can have many trustees in the trustee group (many to many). Many college can be subscribed to
+one same university.
+
+
+7.Aggregation
+An aggregation is a special type of association where one class "has a" kind of relationship with another class i.e. it is a directional relationship
+from one class to another
+Aggregation is generally denoted by  "---------<>"
+
+example:
+public class college{
+	private List<Teacher> teacherList;
+	private List<Student> studentList;
+	private Principal principal;
+	private TrusteeGroup trusteeGroup;
+	private University subscribedToUniversity;
+}
+
+in the above example, the college has many teachers,students and one principal and group of trustees.
+
+5.Composition
+A composition is a special type of aggregation where one class cannot exist without the presence of another class.
+Composition is generally denoted by  "---------<0>". 0 symbolises the shading part inside "<>"
+
+example:
+public class Branch{
+	private List<Student> StudentList;
+}
+
+A branch can have many students but the sudent can be related to only one branch in a college. alternatively,
+the student cannot exist withoout the presence of a branch.
+Hence branch and student are said to be linked using compostion relationship.
+
+6.Inheritance
+Inheritance is type of "is-a" relationship.Inheritance is the way the child class inherits the protected/default/public methods/properties of
+the super class. Inheritance should be only used is the child class is a type of superclass.
+Also the child class can overide the exiting method implementation of the super class by annotation @overide keyword with the
+same method signature.
+
+example:
+public class Vechile(){
+	protected String color;
+	public void setColor(){
+		this.color = "RED";
+	}
+}
+
+public class car extends Vechile(){
+	public String Company;
+	
+	@overide
+	public void setColor(){
+	 this.color = "GREEN"
+	}
+}
+
+in the above example,the car is a type of vechile. it inherits the properties color and overides the method setColor to set the color to 
+Grren hence if the following statement is called the color of the car would be green and not red
+	Vechile v= new Car();
+	v.setColor();  -> the color is set to green
+But in the following case the color is set to red
+	Vechile v= new Vechile();
+	v.setColor();  -> the color is set to RED
+	
