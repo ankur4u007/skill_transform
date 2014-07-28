@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component("csvReader")
-public class CsvReader {
+public class CsvReader implements ICsvReader {
 
     @Value("${inputFile_Name}")
     private String fileName;

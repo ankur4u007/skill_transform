@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component("CsvWriter")
-public class CsvWriter {
+public class CsvWriter implements ICsvWriter {
 
     @Value("${outputFile_Name}")
     private String fileName;
