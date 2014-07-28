@@ -7,6 +7,6 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 
-	 <context:property-placeholder location="classpath:bpoConstants.properties"/>
- 	 <context:component-scan base-package="bpo" />
+	 <context:property-placeholder location="classpath:utilConstants.properties"/>
+ 	 <context:component-scan base-package="util" />
 </beans>
