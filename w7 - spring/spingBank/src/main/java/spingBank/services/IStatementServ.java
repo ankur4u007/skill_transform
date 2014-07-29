@@ -13,5 +13,8 @@ import spingBank.bo.customerBOs.AbstractCustomerBO;
  */
 public interface IStatementServ {
 
-    void querryStatement(AbstractCustomerBO customer, String accountNo, Date fromDate, Date toDate);
+    void querryStatementForSpecifiPeriod(AbstractCustomerBO customer, String accountNo, Date fromDate, Date toDate);
+
+    void querryStatementForMonth(AbstractCustomerBO customer, String accountNo, String month);
+
 }

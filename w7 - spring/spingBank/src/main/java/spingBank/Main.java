@@ -43,7 +43,9 @@ public class Main {
 			tranService.withdrawFund(bo, bo.getAccountNumber().get(0), 22);
 			for (final AbstractCustomerBO customerBo : boList) {
 			    for (final String account : customerBo.getAccountNumber()) {
-				statementServ.querryStatement(customerBo, account, new Date(), new Date());
+				statementServ.querryStatementForSpecifiPeriod(customerBo, account, new Date(),
+					new Date());
+				statementServ.querryStatementForMonth(customerBo, account, "JAN");
 			    }
 			}
 		    }
@@ -58,7 +60,8 @@ public class Main {
 	    tranService.withdrawFund(bo, bo.getAccountNumber().get(0), 22);
 	    for (final AbstractCustomerBO customerBo : boList) {
 		for (final String account : customerBo.getAccountNumber()) {
-		    statementServ.querryStatement(customerBo, account, new Date(), new Date());
+		    statementServ.querryStatementForSpecifiPeriod(customerBo, account, new Date(), new Date());
+		    statementServ.querryStatementForMonth(customerBo, account, "JAN");
 		}
 	    }
 	}
