@@ -8,10 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import spingBank.bo.customerBOs.AbstractCustomerBO;
@@ -27,10 +24,7 @@ public class CustomerFactory implements ICustomerFactory {
 
     @Value("${priviledge_accounts}")
     private String priviledgeAccounts;
-    @Resource(name = "getAllPriviledgeCustomers")
-    private List<String> priviledgeList;
 
-    @Bean(name = "getAllPriviledgeCustomers")
     private List<String> getAllPriviledgeCustomers() {
 	List<String> list = null;
 	if (priviledgeAccounts != null) {
@@ -77,6 +71,7 @@ public class CustomerFactory implements ICustomerFactory {
     }
 
     private Boolean isCustomerPrivileged(final String accountNumber) {
+	final List<String> priviledgeList = getAllPriviledgeCustomers();
 	if (priviledgeList != null) {
 	    return priviledgeList.contains(accountNumber);
 	}

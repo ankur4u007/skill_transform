@@ -102,4 +102,15 @@ public abstract class AbstractCustomerBO {
 	this.privileged = privileged;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+	return "AbstractCustomerBO [name=" + name + ", address=" + address + ", accountNumber=" + accountNumber
+		+ ", otherInfo=" + otherInfo + ", privileged=" + privileged + "]";
+    }
+
 }

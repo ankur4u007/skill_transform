@@ -104,4 +104,15 @@ public abstract class AbstractEmployeeBO {
 	this.otherInfo = otherInfo;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+	return "AbstractEmployeeBO [name=" + name + ", address=" + address + ", typeOfEmployee=" + typeOfEmployee
+		+ ", departments=" + departments + ", otherInfo=" + otherInfo + "]";
+    }
+
 }

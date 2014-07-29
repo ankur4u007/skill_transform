@@ -7,5 +7,5 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
            
 	 <context:property-placeholder location="classpath:bankConstants.properties"/>
- 	 <context:component-scan base-package="springBank" />
+ 	 <context:component-scan base-package="spingBank" />
 </beans>
