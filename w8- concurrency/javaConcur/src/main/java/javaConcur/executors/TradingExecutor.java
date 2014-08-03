@@ -1,7 +1,7 @@
 /**
  *
  */
-package javaConcur;
+package javaConcur.executors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import javaConcur.broker.IBroker;
+import javaConcur.domainObj.StockUnits;
+
+import org.apache.log4j.Logger;
 
 /**
  * @author CHANDRAYAN
@@ -21,6 +25,8 @@ public class TradingExecutor implements Callable<StockUnits> {
     private final String company;
     private final List<IBroker> brokersList;
     private Integer stockscollected;
+
+    private static final Logger logger = Logger.getLogger(TradingExecutor.class);
 
     /**
      * @param clientToServe
@@ -53,6 +59,7 @@ public class TradingExecutor implements Callable<StockUnits> {
 		    futureresultList.add(result);
 		}
 		stockscollected += getTotalStocksCollected(futureresultList);
+		executorServiceBrokers.shutdown();
 	    }
 	}
 	return new StockUnits(stockscollected, company);
@@ -67,11 +74,9 @@ public class TradingExecutor implements Callable<StockUnits> {
 		totalCollections += units.getNumberOfStocks();
 	    }
 	} catch (final InterruptedException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    logger.error(e.getMessage(), e);
 	} catch (final ExecutionException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    logger.error(e.getMessage(), e);
 	}
 	return totalCollections;
     }

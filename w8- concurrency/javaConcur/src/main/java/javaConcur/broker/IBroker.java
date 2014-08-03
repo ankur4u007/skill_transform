@@ -1,7 +1,9 @@
 /**
  *
  */
-package javaConcur;
+package javaConcur.broker;
+
+import javaConcur.domainObj.StockUnits;
 
 /**
  * @author CHANDRAYAN

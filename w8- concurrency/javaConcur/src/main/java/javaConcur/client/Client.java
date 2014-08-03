@@ -1,7 +1,8 @@
-package javaConcur;
+package javaConcur.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import javaConcur.domainObj.StockUnits;
 
 /**
  *
@@ -62,7 +63,7 @@ public class Client {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override

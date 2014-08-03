@@ -3,6 +3,8 @@
  */
 package javaConcur;
 
+import javaConcur.trader.ITrader;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

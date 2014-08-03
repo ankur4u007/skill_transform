@@ -1,7 +1,7 @@
 /**
  *
  */
-package javaConcur;
+package javaConcur.trader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,12 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import javaConcur.broker.IBroker;
+import javaConcur.client.Client;
+import javaConcur.domainObj.StockUnits;
+import javaConcur.executors.TradingExecutor;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,6 +27,8 @@ public class Trader implements ITrader {
 
     private List<IBroker> brokersList;
     private List<Client> clientsToServeList;
+
+    private static final Logger logger = Logger.getLogger(Trader.class);
 
     /**
      *
@@ -55,16 +62,14 @@ public class Trader implements ITrader {
 		    final Future<StockUnits> futureStocks = futureresultList.get(i);
 		    final StockUnits units = futureStocks.get();
 		    clientsToServeList.get(i).updateStockUnitList(units);
-		    System.out.println(clientsToServeList.get(i));
+		    logger.info(clientsToServeList.get(i));
 		}
 	    } catch (final InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		logger.error(e.getMessage(), e);
 	    } catch (final ExecutionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		logger.error(e.getMessage(), e);
 	    }
-
+	    executorServiceClients.shutdown();
 	}
 
     }

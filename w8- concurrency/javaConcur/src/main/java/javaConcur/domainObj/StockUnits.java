@@ -1,8 +1,7 @@
 /**
  *
  */
-package javaConcur;
-
+package javaConcur.domainObj;
 
 /**
  * @author CHANDRAYAN
@@ -55,7 +54,7 @@ public class StockUnits {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see java.lang.Object#toString()
      */
     @Override

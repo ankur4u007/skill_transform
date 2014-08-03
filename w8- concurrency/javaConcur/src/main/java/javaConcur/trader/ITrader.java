@@ -1,9 +1,11 @@
 /**
  *
  */
-package javaConcur;
+package javaConcur.trader;
 
 import java.util.List;
+import javaConcur.broker.IBroker;
+import javaConcur.client.Client;
 
 /**
  * @author CHANDRAYAN

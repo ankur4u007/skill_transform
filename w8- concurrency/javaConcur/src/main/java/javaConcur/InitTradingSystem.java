@@ -6,6 +6,11 @@ package javaConcur;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import javaConcur.broker.Broker;
+import javaConcur.broker.IBroker;
+import javaConcur.client.Client;
+import javaConcur.domainObj.StockUnits;
+import javaConcur.trader.ITrader;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
