@@ -18,6 +18,7 @@ The DEEP COPY can be  achieved by two ways :
 1) implementing the Serializable interface
 2) by iterating through each complex type properties present in the class
 and overriding clone method in each pojo classes and creating new objects wherever required.
+
 Among (1) and (2) obviously (2) is more efficient as no output stream opening,reading,writing and 
 closing operations are required so performance wise (2) is better , however for a 
 complex class we can have multiple complex type properties and overriding clone method 
