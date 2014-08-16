@@ -1,0 +1,37 @@
+SHALLOW COPY:
+
+Shallow copy should be used mostly if the properties of a class are primitives.
+if the class contains mix of primitives and complex(other objects) properties ,
+depending upon the need we have to choose carefully between 
+shallow copy and the deep copy mechanism. Why ? its simply because
+hard copy is more expensive than the shallow copy and therefore should be 
+use only if its really required. How? we will see in the below paragraphs..
+
+in the given program we are using the SHALLOW COPY first by simply overriding the
+clone method of the object and calling "super.clone()".
+Super.clone() clones both the primitives types and the complex types properties
+where primitives are deep copied where as complex types are shallow copied( for complex types
+only references are copied and not the real object itself).
+
+
+The DEEP COPY can be  achieved by two ways :
+1) implementing the Serializable interface
+2) by iterating through each complex type properties present in the class
+and overriding each clone method and creating new objects wherever required.
+Among (1) and (2) obviously (2) is more efficient as no output stream opening,reading,writing and 
+closing operations are required so performance wise (2) is better , however for a 
+complex class we can have multiple complex type properties and overriding clone method 
+in each property may not be even possible. sometimes some referred classes may be available in 
+third party jars hence overriding clone method in those classes is simply not
+possible.Therefer we tend to use the (1) option but we must remember the fact that 
+it comes with a performance overhead so it must be used judiciously.
+
+in the given program we are implementing the deep copy suing the serializable interface
+and by overriding the writeobject and readobject methods in each pojos 
+since we need each cloned string attribute in upper case. here we coud have overridden 
+clone method and created objects in the clone method of each pojo but since we
+also needed to demonstrate the shallow copy, we chose using the serializable interface 
+implementation would be a good option. However given the scenarios and performance 
+efficiency and if all the classes referred in the core class to be cloned are available,
+one should always choose overriding the clone method and creting the new object instance 
+rather than implementing the serializable interface.
