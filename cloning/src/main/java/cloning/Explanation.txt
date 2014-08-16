@@ -27,12 +27,13 @@ third party jars hence overriding clone method in those classes is simply not
 possible.Therefore we tend to use the (1) option but we must remember the fact that 
 it comes with a performance overhead so it must be used judiciously.
 
-in the given program we are implementing the deep copy suing the serializable interface
-and by overriding the writeobject and readobject methods in each pojos 
-since we need each cloned string attribute in upper case. here we coud have overridden 
-clone method and created objects in the clone method of each pojo but since we
-also needed to demonstrate the shallow copy, we chose using the serializable interface 
-implementation would be a good option. However given the scenarios and performance 
-efficiency and if all the classes referred in the core class to be cloned are available,
-one should always choose overriding the clone method and creting the new object instance 
+in the given program we are implementing the deep copy using the serializable interface
+and by overriding the writeobject and readobject methods in each pojos as 
+ we needed each cloned string attribute in upper case. 
+ here we could have overridden clone method and created objects in the clone method 
+ of each pojo but since we also needed to demonstrate the shallow copy, 
+ we chose using the serializable interface implementation would be a good option. 
+ However given the scenarios and performance efficiency and if all the classes 
+ referred in the core class to be cloned are available,
+one should always choose overriding the clone method and creating the new object instance 
 rather than implementing the serializable interface.
