@@ -17,13 +17,13 @@ only references are copied and not the real object itself).
 The DEEP COPY can be  achieved by two ways :
 1) implementing the Serializable interface
 2) by iterating through each complex type properties present in the class
-and overriding each clone method and creating new objects wherever required.
+and overriding clone method in each pojo classes and creating new objects wherever required.
 Among (1) and (2) obviously (2) is more efficient as no output stream opening,reading,writing and 
 closing operations are required so performance wise (2) is better , however for a 
 complex class we can have multiple complex type properties and overriding clone method 
 in each property may not be even possible. sometimes some referred classes may be available in 
 third party jars hence overriding clone method in those classes is simply not
-possible.Therefer we tend to use the (1) option but we must remember the fact that 
+possible.Therefore we tend to use the (1) option but we must remember the fact that 
 it comes with a performance overhead so it must be used judiciously.
 
 in the given program we are implementing the deep copy suing the serializable interface
