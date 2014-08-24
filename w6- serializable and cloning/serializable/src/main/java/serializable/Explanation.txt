@@ -1,3 +1,4 @@
+#############################################################################
 # Brief explaination how the serialization is demonstrated here:
 first we created a customer and address class and generated the class files
 (the first version of these class files can be found in classpath: resouces/ver1)
@@ -25,7 +26,8 @@ can be handled by serialization , we are able to recover our old serialized data
 #Explanation of the Scenarios:
 2) What Could be out of sync problems in jar ? how do we avoid this..?
 -> Generally the out of sync like situation arises because of changes made to the 
-Class files. in such situations one can make following changes to the class files :
+Class files. in such situations one can make following changes(also known as compatible changes)
+to the class files :
 
 .Add fields
 .Change a field from static to non-static
@@ -39,10 +41,19 @@ differs if there is a change in the class hence resulting in a different sui eac
 hence piece of advice to eliminate out of sync problems with compatible changes would be
 to use the same SUID.
 
+Also below are some incompitble changes that when made will most likely result into an 
+InvalidClassException(discussed below)
+
+.Delete fields(non-transient)
+.Change class hierarchy
+.Change non-static to static
+.Change non-transient to transient
+.Change type of a primitive field
+
 #############################################################################
 
-#Assume one of the properties is not supposed to be serialised, how?
--> make the property as transient.
+#Assume one of the properties is not supposed to be serialized, how?
+-> make the property as transient.(like in our example we did to details field)
 
 #############################################################################
 
