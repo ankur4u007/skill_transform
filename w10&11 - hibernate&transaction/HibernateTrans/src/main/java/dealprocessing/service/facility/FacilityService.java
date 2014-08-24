@@ -25,7 +25,6 @@ public class FacilityService implements IFacilityService {
     @Autowired
     private IDrawDownService drawDownService;
 
-    @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void createFacility(final FacilityBO facilityBoToCreate) {
 	final Facility facility = DOBuilders.getFacilityDomainObjectFromBO(facilityBoToCreate);
@@ -37,7 +36,6 @@ public class FacilityService implements IFacilityService {
 	}
     }
 
-    @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void createFacility(final Facility facilityToCreate) {
 	facilityDao.create(facilityToCreate);
@@ -49,7 +47,6 @@ public class FacilityService implements IFacilityService {
 	}
     }
 
-    @Override
     public List<FacilityBO> getAllFacility() {
 	return BOBuilders.buildFacilityBOListFromDomainObjectList(facilityDao.findAll());
     }

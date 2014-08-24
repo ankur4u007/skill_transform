@@ -20,20 +20,17 @@ public class DrawDownService implements IDrawDownService {
     @Autowired
     private IDrawDownDao drawDownDao;
 
-    @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void createDrawDown(final DrawDownBO drawDownBoToCreate) {
 	final DrawDown drawDown = DOBuilders.getDrawDownDomainObjectFromBO(drawDownBoToCreate);
 	drawDownDao.create(drawDown);
     }
 
-    @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void createDrawDown(final DrawDown drawDownToCreate) {
 	drawDownDao.create(drawDownToCreate);
     }
 
-    @Override
     public List<DrawDownBO> getAllDrawDowns() {
 	return BOBuilders.buildDrawDownBOListFromDomainObjectList(drawDownDao.findAll());
     }

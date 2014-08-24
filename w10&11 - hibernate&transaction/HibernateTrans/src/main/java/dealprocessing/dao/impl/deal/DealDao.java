@@ -17,14 +17,12 @@ import dealprocessing.domainobject.Deal;
 @Component("daelDao")
 public class DealDao extends AbstractDao<Integer, Deal> implements IDealDao {
 
-    @Override
     public Deal findByFacilityId(final int facilityId) {
 	final Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Deal.class);
 	criteria.createAlias("facilityList", "facility").add(Restrictions.eq("facility.id", facilityId));
 	return (Deal) criteria.uniqueResult();
     }
 
-    @Override
     public Deal findByDrawDownId(final int drawDownId) {
 	final Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Deal.class);
 	criteria.createAlias("facilityList", "facility").createAlias("facility.drawDownList", "drawDown")
