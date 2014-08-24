@@ -10,13 +10,13 @@ current version Customer class fields are :
     private List<Address> adrressList;
     private Integer id;
     private transient String details;
-    -- and the associted getter and setters
+    -- and the associated getter and setters
     
 where as ver1 Customer Class fields are:
     private String name;
     private List<Address> adrressList;
     private transient Date dob;
-    -- and the associted getter and setters;
+    -- and the associated getter and setters;
     
 Hence we can see that the in the newer version we have removed the transient field dob and
 added two fields, namely id and details. However as these changes are compatible and 
