@@ -1,5 +1,5 @@
 #############################################################################
-# Brief explaination how the serialization is demonstrated here:
+# Brief explanation how the serialization is demonstrated here:
 first we created a customer and address class and generated the class files
 (the first version of these class files can be found in classpath: resouces/ver1)
 
