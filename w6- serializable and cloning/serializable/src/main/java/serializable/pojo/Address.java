@@ -1,7 +1,7 @@
 /**
  *
  */
-package serializable.pojo.ver2;
+package serializable.pojo;
 
 import java.io.Serializable;
 
@@ -17,18 +17,15 @@ public class Address implements Serializable {
     private static final long serialVersionUID = -6875096154861989530L;
     private String houseNo;
     private String location;
-    private Long pinNumber;
 
     /**
      * @param houseNo
      * @param location
-     * @param pinNumber
      */
-    public Address(final String houseNo, final String location, final Long pinNumber) {
+    public Address(final String houseNo, final String location) {
 	super();
 	this.houseNo = houseNo;
 	this.location = location;
-	this.pinNumber = pinNumber;
     }
 
     /**
@@ -61,19 +58,14 @@ public class Address implements Serializable {
 	this.location = location;
     }
 
-    /**
-     * @return the pinNumber
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
      */
-    public final Long getPinNumber() {
-	return pinNumber;
-    }
-
-    /**
-     * @param pinNumber
-     *            the pinNumber to set
-     */
-    public final void setPinNumber(final Long pinNumber) {
-	this.pinNumber = pinNumber;
+    @Override
+    public String toString() {
+	return "Address [houseNo=" + houseNo + ", location=" + location + "]";
     }
 
 }

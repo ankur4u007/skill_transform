@@ -1,0 +1,107 @@
+# Brief explaination how the serialization is demonstrated here:
+first we created a customer and address class and generated the class files
+(the first version of these class files can be found in classpath: resouces/ver1)
+
+the difference between two current versions and the version 1 is
+
+current version Customer class fields are :
+    private String name;
+    private List<Address> adrressList;
+    private Integer id;
+    private transient String details;
+    -- and the associted getter and setters
+    
+where as ver1 Customer Class fields are:
+    private String name;
+    private List<Address> adrressList;
+    private transient Date dob;
+    -- and the associted getter and setters;
+    
+Hence we can see that the in the newer version we have removed the transient field dob and
+added two fields, namely id and details. However as these changes are compatible and 
+can be handled by serialization , we are able to recover our old serialized data
+(in this case it is Customer1.ser and Customer2.ser).
+#############################################################################
+#Explanation of the Scenarios:
+2) What Could be out of sync problems in jar ? how do we avoid this..?
+-> Generally the out of sync like situation arises because of changes made to the 
+Class files. in such situations one can make following changes to the class files :
+
+.Add fields
+.Change a field from static to non-static
+.Change a field from transient to non-transient
+.Add classes to the object tree
+
+in these situation generally a InvalidClassException exception is thrown. To avoid this exception
+one must keep the serialVersionUID variable same before and after the changes to the class concerned.
+if the serialVersionUID is not present in the class, the jvm calculates the suid using sha which always
+differs if there is a change in the class hence resulting in a different sui each time.
+hence piece of advice to eliminate out of sync problems with compatible changes would be
+to use the same SUID.
+
+#############################################################################
+
+#Assume one of the properties is not supposed to be serialised, how?
+-> make the property as transient.
+
+#############################################################################
+
+#Different types of exception thrown and ways to avoid them. how?
+-> list of exception thrown by serializable are:
+
+1) InvalidClassException : -> 
+
+when :->
+.The class does not match the serial version of the class in the stream.
+.The class contains fields with invalid primitive data types.
+.The Externalizable class does not have a public no-arg constructor.
+.The Serializable class can not access the no-arg constructor of 
+ its closest non-Serializable superclass. 
+
+solution:->
+.keep the SUID same of the changed classes.
+.all the primitives data types defined must be known to jvm.
+.make a public no arg cunstrucotr for the classes extending Externalizable and for non serializable
+ super classes.
+
+2)  NotSerializableException :->
+
+When:->
+Thrown by a readObject or writeObject method to terminate serialization or deserialization.
+
+Solution:->
+.ensure the suid are same for the newer and the older versions of the class.
+.the read object method should read the serialized file in the same manner the way
+ the write object method is writing to the files(if present)
+.ensure only the compatible changes(listed above) are made to the class.
+
+3) other excetions thrown by serialization are related to streams like :
+ObjectStreamException,StreamCorruptedException,NotActiveException,
+OptionalDataException,WriteAbortedException etc and are not specific to serialization..
+
+#############################################################################
+
+#Different ways to serialize ?
+apart from serializable interface there are three different ways to serialize :
+
+1)For object serialization, instead of implementing the Serializable interface, 
+ one can implement the Externalizable interface, which extends Serializable.
+ By implementing Externalizable, a developer is responsible for implementing the writeExternal() 
+ and readExternal() methods. As a result, a one has sole control 
+ over reading and writing the serialized objects.
+ 
+2)XML serialization is an often-used approach for data interchange.
+ This approach lags runtime performance when compared with Java serialization,
+  both in terms of the size of the object and the processing time. 
+  With a speedier XML parser, the performance gap with respect to the processing time narrows.
+  Nonetheless, XML serialization provides a more malleable solution when faced
+  with changes in the serializable object.
+  
+3)Finally, consider a "roll-your-own" serialization approach. You can write an 
+  object's content directly via either the ObjectOutputStream or the DataOutputStream.
+  While this approach is more involved in its initial implementation,
+  it offers the greatest flexibility and extensibility. In addition,
+  this approach provides a performance advantage over Java serialization.
+
+#############################################################################
+

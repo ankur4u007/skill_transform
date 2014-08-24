@@ -14,6 +14,8 @@ where primitives are deep copied where as complex types are shallow copied( for 
 only references are copied and not the real object itself).
 
 
+#############################################################################
+
 The DEEP COPY can be  achieved by two ways :
 1) implementing the Serializable interface
 2) by iterating through each complex type properties present in the class
@@ -26,6 +28,9 @@ in each property may not be even possible. sometimes some referred classes may b
 third party jars hence overriding clone method in those classes is simply not
 possible.Therefore we tend to use the (1) option but we must remember the fact that 
 it comes with a performance overhead so it must be used judiciously.
+
+
+#############################################################################
 
 in the given program we are implementing the deep copy using the serializable interface
 and by overriding the writeobject and readobject methods in each pojos as 
