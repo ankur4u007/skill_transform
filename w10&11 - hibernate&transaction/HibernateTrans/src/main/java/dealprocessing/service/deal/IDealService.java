@@ -13,7 +13,7 @@ import dealprocessing.bo.DealBO;
  */
 public interface IDealService {
 
-    void createDeal(DealBO dealToCreate);
+    void createDeals(List<DealBO> dealToCreate);
 
     DealBO getDealByFacilityId(int facilityId);
 

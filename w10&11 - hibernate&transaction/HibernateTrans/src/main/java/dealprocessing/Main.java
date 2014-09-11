@@ -29,11 +29,8 @@ public class Main {
 	final IDealService dealService = context.getBean(IDealService.class);
 	final List<DealBO> dealBOListToCreate = BOFactory.createDealBOList(2);
 	// creating deals
-	if (dealBOListToCreate != null) {
-	    for (final DealBO bo : dealBOListToCreate) {
-		dealService.createDeal(bo);
-	    }
-	}
+	dealService.createDeals(dealBOListToCreate);
+
 	final List<DealBO> dealBOList = dealService.getAllDeals();
 	for (final DealBO deals : dealBOList) {
 	    System.out.println(deals);

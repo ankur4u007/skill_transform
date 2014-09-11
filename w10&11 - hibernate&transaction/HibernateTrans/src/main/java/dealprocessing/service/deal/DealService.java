@@ -25,13 +25,17 @@ public class DealService implements IDealService {
     private IFacilityService facilityService;
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void createDeal(final DealBO dealToCreate) {
-	final Deal deal = DOBuilders.getDealDomainObjectFromBO(dealToCreate);
-	dealDao.create(deal);
-	if (deal.getFacilityList() != null) {
-	    for (final Facility facility : deal.getFacilityList()) {
-		facility.setDeal(deal);
-		facilityService.createFacility(facility);
+    public void createDeals(final List<DealBO> dealListToCreate) {
+	if (dealListToCreate != null) {
+	    for (final DealBO dealToCreate : dealListToCreate) {
+		final Deal deal = DOBuilders.getDealDomainObjectFromBO(dealToCreate);
+		dealDao.create(deal);
+		if (deal.getFacilityList() != null) {
+		    for (final Facility facility : deal.getFacilityList()) {
+			facility.setDeal(deal);
+			facilityService.createFacility(facility);
+		    }
+		}
 	    }
 	}
     }
