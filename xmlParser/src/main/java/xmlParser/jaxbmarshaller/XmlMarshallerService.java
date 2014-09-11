@@ -1,9 +1,10 @@
 package xmlParser.jaxbmarshaller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -12,32 +13,28 @@ import javax.xml.bind.Marshaller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import xmlParser.bo.DealBO;
-import xmlParser.jaxbobjects.Deal;
+import xmlParser.jaxbobjects.Deals;
 
 @Component("xmlMarshallerService")
-public class XmlMarshallerService {
+public class XmlMarshallerService implements IXmlMarshallerService {
 
     @Value("${xml.file.name}")
     private String fileName;
-    @Value("${xml.file.location}")
+    @Value("${xml.file.classPathlocation}")
     private String fileLocation;
 
-    public void createXmlFile(final List<DealBO> boListToCreate) throws JAXBException, URISyntaxException {
-	if (boListToCreate != null) {
-	    final JAXBContext jaxbContext = JAXBContext.newInstance(Deal.class);
+    public void createXmlFile(final Deals deals) throws JAXBException, URISyntaxException, IOException {
+	if (deals != null) {
+	    final JAXBContext jaxbContext = JAXBContext.newInstance(Deals.class);
 	    final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
 	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
 	    // Marshal the employees list in console
-	    jaxbMarshaller.marshal(boListToCreate, System.out);
-
-	    final URL url = this.getClass().getResource(fileLocation + "/" + fileName + ".xml");
-
-	    final File file = new File(url.toURI());
+	    final String filePath = fileLocation + fileName;
+	    final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
 	    // Marshal the employees list in file
-	    jaxbMarshaller.marshal(boListToCreate, file);
+	    jaxbMarshaller.marshal(deals, bos);
+	    bos.flush();
+	    bos.close();
 	}
     }
 }

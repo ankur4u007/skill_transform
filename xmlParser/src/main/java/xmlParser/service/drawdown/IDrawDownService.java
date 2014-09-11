@@ -14,7 +14,7 @@ import xmlParser.domainobject.DrawDown;
  */
 public interface IDrawDownService {
 
-    void createDrawDown(DrawDownBO drawDownBoToCreate);
+    void createDrawDown(xmlParser.jaxbobjects.DrawDown drawDownToCreate);
 
     void createDrawDown(DrawDown drawDownToCreate);
 

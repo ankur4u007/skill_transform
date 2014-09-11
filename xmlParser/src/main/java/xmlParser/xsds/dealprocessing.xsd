@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <xs:element name="deal" type="deal"/>
-
-  <xs:complexType name="facility">
-    <xs:sequence>
-      <xs:element name="amount" type="xs:double" minOccurs="0"/>
-      <xs:element name="drawDownList" type="drawDown" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="id" type="xs:int" minOccurs="0"/>
-      <xs:element name="maturityDate" type="xs:dateTime" minOccurs="0"/>
-      <xs:element name="startDate" type="xs:dateTime" minOccurs="0"/>
+  <xs:element name="deals" type="deals" />
+	
+  <xs:complexType name="deals" >
+	<xs:sequence>
+      <xs:element name="deal" type="deal" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-  </xs:complexType>
+   </xs:complexType>
 
   <xs:complexType name="deal">
     <xs:sequence>
@@ -23,6 +19,16 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="facility">
+    <xs:sequence>
+      <xs:element name="amount" type="xs:double" minOccurs="0"/>
+      <xs:element name="drawDownList" type="drawDown" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="id" type="xs:int" minOccurs="0"/>
+      <xs:element name="maturityDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="startDate" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  
   <xs:complexType name="drawDown">
     <xs:sequence>
       <xs:element name="amount" type="xs:double" minOccurs="0"/>

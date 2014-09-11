@@ -7,10 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import xmlParser.bo.DrawDownBO;
 import xmlParser.bo.FacilityBO;
-import xmlParser.builders.BOBuilders;
-import xmlParser.builders.DOBuilders;
+import xmlParser.builders.BOBuilder;
+import xmlParser.builders.DOBuilder;
 import xmlParser.dao.impl.facility.IFacilityDao;
 import xmlParser.domainobject.DrawDown;
 import xmlParser.domainobject.Facility;
@@ -26,12 +25,12 @@ public class FacilityService implements IFacilityService {
     private IDrawDownService drawDownService;
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void createFacility(final FacilityBO facilityBoToCreate) {
-	final Facility facility = DOBuilders.getFacilityDomainObjectFromBO(facilityBoToCreate);
+    public void createFacility(final xmlParser.jaxbobjects.Facility facilityToCreate) {
+	final Facility facility = DOBuilder.getFacilityDomainObjectFromJAXBO(facilityToCreate);
 	facilityDao.create(facility);
-	if (facilityBoToCreate.getDrawDownBOList() != null) {
-	    for (final DrawDownBO drawDownBO : facilityBoToCreate.getDrawDownBOList()) {
-		drawDownService.createDrawDown(drawDownBO);
+	if (facilityToCreate.getDrawDownList() != null) {
+	    for (final xmlParser.jaxbobjects.DrawDown drawDown : facilityToCreate.getDrawDownList()) {
+		drawDownService.createDrawDown(drawDown);
 	    }
 	}
     }
@@ -48,7 +47,7 @@ public class FacilityService implements IFacilityService {
     }
 
     public List<FacilityBO> getAllFacility() {
-	return BOBuilders.buildFacilityBOListFromDomainObjectList(facilityDao.findAll());
+	return BOBuilder.buildFacilityBOListFromDomainObjectList(facilityDao.findAll());
     }
 
 }

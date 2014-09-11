@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import xmlParser.bo.DrawDownBO;
-import xmlParser.builders.BOBuilders;
-import xmlParser.builders.DOBuilders;
+import xmlParser.builders.BOBuilder;
+import xmlParser.builders.DOBuilder;
 import xmlParser.dao.impl.drawdown.IDrawDownDao;
 import xmlParser.domainobject.DrawDown;
 
@@ -21,8 +21,8 @@ public class DrawDownService implements IDrawDownService {
     private IDrawDownDao drawDownDao;
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void createDrawDown(final DrawDownBO drawDownBoToCreate) {
-	final DrawDown drawDown = DOBuilders.getDrawDownDomainObjectFromBO(drawDownBoToCreate);
+    public void createDrawDown(final xmlParser.jaxbobjects.DrawDown drawDownBoToCreate) {
+	final DrawDown drawDown = DOBuilder.getDrawDownDomainObjectFromJAXBO(drawDownBoToCreate);
 	drawDownDao.create(drawDown);
     }
 
@@ -32,7 +32,7 @@ public class DrawDownService implements IDrawDownService {
     }
 
     public List<DrawDownBO> getAllDrawDowns() {
-	return BOBuilders.buildDrawDownBOListFromDomainObjectList(drawDownDao.findAll());
+	return BOBuilder.buildDrawDownBOListFromDomainObjectList(drawDownDao.findAll());
     }
 
 }

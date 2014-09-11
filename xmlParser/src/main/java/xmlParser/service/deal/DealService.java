@@ -1,5 +1,6 @@
 package xmlParser.service.deal;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import xmlParser.bo.DealBO;
-import xmlParser.builders.BOBuilders;
-import xmlParser.builders.DOBuilders;
+import xmlParser.builders.BOBuilder;
+import xmlParser.builders.DOBuilder;
 import xmlParser.dao.impl.deal.IDealDao;
 import xmlParser.domainobject.Deal;
 import xmlParser.domainobject.Facility;
@@ -25,10 +26,26 @@ public class DealService implements IDealService {
     private IFacilityService facilityService;
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void createDeals(final List<DealBO> dealListToCreate) {
+    public void createDeals(final List<xmlParser.jaxbobjects.Deal> dealListToCreate) {
+	if (dealListToCreate != null) {
+	    for (final xmlParser.jaxbobjects.Deal dealToCreate : dealListToCreate) {
+		final Deal deal = DOBuilder.getDealDomainObjectFromJAXBO(dealToCreate);
+		dealDao.create(deal);
+		if (deal.getFacilityList() != null) {
+		    for (final Facility facility : deal.getFacilityList()) {
+			facility.setDeal(deal);
+			facilityService.createFacility(facility);
+		    }
+		}
+	    }
+	}
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void createDealsByBOList(final List<DealBO> dealListToCreate) {
 	if (dealListToCreate != null) {
 	    for (final DealBO dealToCreate : dealListToCreate) {
-		final Deal deal = DOBuilders.getDealDomainObjectFromBO(dealToCreate);
+		final Deal deal = DOBuilder.getDealDomainObjectFromBO(dealToCreate);
 		dealDao.create(deal);
 		if (deal.getFacilityList() != null) {
 		    for (final Facility facility : deal.getFacilityList()) {
@@ -41,15 +58,18 @@ public class DealService implements IDealService {
     }
 
     public DealBO getDealByFacilityId(final int facilityId) {
-	return BOBuilders.buildDealBOFromDomainObject(dealDao.findByFacilityId(facilityId));
+	return BOBuilder.buildDealBOFromDomainObject(dealDao.findByFacilityId(facilityId));
     }
 
     public DealBO getDealByDrawdownId(final int drawdownId) {
-	return BOBuilders.buildDealBOFromDomainObject(dealDao.findByDrawDownId(drawdownId));
+	return BOBuilder.buildDealBOFromDomainObject(dealDao.findByDrawDownId(drawdownId));
     }
 
     public List<DealBO> getAllDeals() {
-	return BOBuilders.buildDealBOListFromDomainObjectList(dealDao.findAll());
+	return BOBuilder.buildDealBOListFromDomainObjectList(dealDao.findAll());
     }
 
+    public List<DealBO> getDealsByMaturityDate(final Date maturityDate) {
+	return BOBuilder.buildDealBOListFromDomainObjectList(dealDao.findByMaturityDate(maturityDate));
+    }
 }

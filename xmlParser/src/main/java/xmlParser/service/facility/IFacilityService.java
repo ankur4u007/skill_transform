@@ -14,7 +14,7 @@ import xmlParser.domainobject.Facility;
  */
 public interface IFacilityService {
 
-    void createFacility(FacilityBO facilityBoToCreate);
+    void createFacility(xmlParser.jaxbobjects.Facility facilityToCreate);
 
     void createFacility(Facility facilityToCreate);
 

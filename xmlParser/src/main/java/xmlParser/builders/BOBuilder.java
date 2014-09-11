@@ -15,9 +15,9 @@ import xmlParser.domainobject.Facility;
  * @author CHANDRAYAN
  *
  */
-public class BOBuilders {
+public class BOBuilder {
 
-    private BOBuilders() {
+    private BOBuilder() {
 
     }
 

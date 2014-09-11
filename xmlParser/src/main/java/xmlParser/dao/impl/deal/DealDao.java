@@ -3,6 +3,9 @@
  */
 package xmlParser.dao.impl.deal;
 
+import java.util.Date;
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
@@ -26,8 +29,14 @@ public class DealDao extends AbstractDao<Integer, Deal> implements IDealDao {
     public Deal findByDrawDownId(final int drawDownId) {
 	final Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Deal.class);
 	criteria.createAlias("facilityList", "facility").createAlias("facility.drawDownList", "drawDown")
-		.add(Restrictions.eq("drawDown.id", drawDownId));
+	.add(Restrictions.eq("drawDown.id", drawDownId));
 	return (Deal) criteria.uniqueResult();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Deal> findByMaturityDate(final Date maturityDate) {
+	final Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Deal.class);
+	criteria.add(Restrictions.eq("maturityDate", maturityDate));
+	return criteria.list();
+    }
 }

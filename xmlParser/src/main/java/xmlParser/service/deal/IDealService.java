@@ -3,9 +3,11 @@
  */
 package xmlParser.service.deal;
 
+import java.util.Date;
 import java.util.List;
 
 import xmlParser.bo.DealBO;
+import xmlParser.jaxbobjects.Deal;
 
 /**
  * @author CHANDRAYAN
@@ -13,7 +15,9 @@ import xmlParser.bo.DealBO;
  */
 public interface IDealService {
 
-    void createDeals(List<DealBO> dealToCreate);
+    void createDeals(List<Deal> dealToCreate);
+
+    void createDealsByBOList(List<DealBO> dealListToCreate);
 
     DealBO getDealByFacilityId(int facilityId);
 
@@ -21,4 +25,5 @@ public interface IDealService {
 
     List<DealBO> getAllDeals();
 
+    List<DealBO> getDealsByMaturityDate(Date maturityDate);
 }
