@@ -1,0 +1,175 @@
+Garbage Collection :
+
+C:\Program Files\Java\jdk1.7.0_51\bin>jstat.exe -gc 5232 1000 20
+ S0C    S1C    S0U    S1U      EC       EU        OC         OU       PC     	PU  	  YGC     YGCT    FGC    FGCT     GCT
+11264.0 3072.0  0.0   2771.4 78336.0   7106.6   134144.0   80035.1   118784.0 112480.0     79    2.548  23     14.282   16.830
+11264.0 3072.0  0.0   2771.4 78336.0  10119.1   134144.0   80035.1   118784.0 112480.0     79    2.548  23     14.282   16.830
+11264.0 3072.0  0.0   2771.4 78336.0  20813.4   134144.0   80035.1   118784.0 112480.5     79    2.548  23     14.282   16.830
+11264.0 3072.0  0.0   2771.4 78336.0  40466.2   134144.0   80035.1   118784.0 112486.2     79    2.548  23     14.282   16.830
+11264.0 3072.0  0.0   2771.4 78336.0  41432.4   134144.0   80035.1   118784.0 112486.2     79    2.548  23     14.282   16.830
+11264.0 3072.0  0.0   2771.4 78336.0  51275.2   134144.0   80035.1   118784.0 112489.6     79    2.548  23     14.282   16.830
+11264.0 3072.0  0.0   2771.4 78336.0  62977.5   134144.0   80035.1   118784.0 112490.5     79    2.548  23     14.282   16.830
+11264.0 3072.0  0.0   2771.4 78336.0  63100.9   134144.0   80035.1   118784.0 112490.5     79    2.548  23     14.282   16.830
+11264.0 3072.0  0.0   2771.4 78336.0  66248.0   134144.0   80035.1   118784.0 112492.1     79    2.548  23     14.282   16.830
+10240.0 10752.0 2640.0  0.0   78848.0  16535.2   134144.0   80035.1   118784.0 112496.3     80    2.561  23     14.282   16.843
+10240.0 10752.0 2640.0  0.0   78848.0  16718.3   134144.0   80035.1   118784.0 112496.7     80    2.561  23     14.282   16.843
+10240.0 10752.0 2640.0  0.0   78848.0  16951.8   134144.0   80035.1   118784.0 112496.7     80    2.561  23     14.282   16.843
+10240.0 10752.0 2640.0  0.0   78848.0  24388.9   134144.0   80035.1   118784.0 112500.6     80    2.561  23     14.282   16.843
+10240.0 10752.0 2640.0  0.0   78848.0  39234.8   134144.0   80035.1   118784.0 112504.0     80    2.561  23     14.282   16.843
+10240.0 10752.0 2640.0  0.0   78848.0  39400.3   134144.0   80035.1   118784.0 112504.0     80    2.561  23     14.282   16.843
+10240.0 10752.0 2640.0  0.0   78848.0  40730.9   134144.0   80035.1   118784.0 112504.4     80    2.561  23     14.282   16.843
+10240.0 10752.0 2640.0  0.0   78848.0  41983.2   134144.0   80035.1   118784.0 112504.4     80    2.561  23     14.282   16.843
+10240.0 10752.0 2640.0  0.0   78848.0  42151.1   134144.0   80035.1   118784.0 112504.4     80    2.561  23     14.282   16.843
+10240.0 10752.0 2640.0  0.0   78848.0  42318.9   134144.0   80035.1   118784.0 112504.4     80    2.561  23     14.282   16.843
+9728.0 2560.0  0.0   2524.5 78848.0    0.0     134144.0   80035.1     118784.0 112504.4     81    2.584  24     14.282   16.866
+
+
+Terms ---->>>>  explaination -  (can be displayed with : the aregumenst) :-
+
+S0C	---->>>> Displays the current size of Survivor0 area in KB	-gc
+can be displayed with :
+-gccapacity
+-gcnew
+-gcnewcapacity
+
+S1C	---->>>>  Displays the current size of Survivor1 area in KB	-gc
+-gccapacity
+-gcnew
+-gcnewcapacity
+
+
+S0U	---->>>>  Displays the current usage of Survivor0 area in KB	-gc
+-gcnew
+
+
+S1U	---->>>>  Displays the current usage of Survivor1 area in KB	-gc
+-gcnew
+
+
+EC	---->>>>  Displays the current size of Eden area in KB	-gc
+-gccapacity
+-gcnew
+-gcnewcapacity
+
+
+EU	---->>>>  Displays the current usage of Eden area in KB	-gc
+-gcnew
+
+
+OC	---->>>>  Displays the current size of old area in KB	-gc
+-gccapacity
+-gcold
+-gcoldcapacity
+
+
+OU	---->>>>  Displays the current usage of old area in KB	-gc
+-gcold
+
+
+PC	---->>>>  Displays the current size of permanent area in KB	-gc
+-gccapacity
+-gcold
+-gcoldcapacity
+-gcpermcapacity
+
+
+PU	---->>>>  Displays the current usage of permanent area in KB	-gc
+-gcold
+
+
+YGC	---->>>>  The number of GC event occurred in young area	-gc
+-gccapacity
+-gcnew
+-gcnewcapacity
+-gcold
+-gcoldcapacity
+-gcpermcapacity
+-gcutil
+-gccause
+
+
+YGCT ---->>>>  The accumulated time for GC operations for Yong area 	-gc
+-gcnew
+-gcutil
+-gccause
+
+
+FGC	---->>>>  The number of full GC event occurred	-gc
+-gccapacity
+-gcnew
+-gcnewcapacity
+-gcold
+-gcoldcapacity
+-gcpermcapacity
+-gcutil
+-gccause
+
+
+FGCT ---->>>>  The accumulated time for full GC operations 	-gc
+-gcold
+-gcoldcapacity
+-gcpermcapacity
+-gcutil
+-gccause
+
+
+GCT	---->>>>  The total accumulated time for GC operations	-gc
+-gcold
+-gcoldcapacity
+-gcpermcapacity
+-gcutil
+-gccause
+
+
+NGCMN	---->>>>  The minimum size of new area in KB	-gccapacity
+-gcnewcapacity
+
+
+NGCMX	---->>>>  The maximum size of max area in KB 	-gccapacity
+-gcnewcapacity
+
+
+NGC	---->>>>  The current size of new area in KB 	-gccapacity
+-gcnewcapacity
+
+
+OGCMN	---->>>>  The minimum size of old area in KB	-gccapacity
+-gcoldcapacity
+
+
+OGCMX	---->>>>  The maximum size of old area in KB	-gccapacity
+-gcoldcapacity
+
+
+OGC	---->>>>  The current size of old area in KB 	-gccapacity
+-gcoldcapacity
+
+
+PGCMN	---->>>>  The minimum size of permanent area in KB	-gccapacity
+-gcpermcapacity
+
+
+PGCMX	---->>>>  The maximum size of permanent area in KB	-gccapacity
+-gcpermcapacity
+
+
+PGC	---->>>>  The current size of permanent generation area in KB	-gccapacity
+-gcpermcapacity
+
+
+PC	---->>>>  The current size of permanent area in KB	-gccapacity
+-gcpermcapacity
+
+
+PU	---->>>>  The current usage of permanent area in KB 	-gc
+-gcold
+
+LGCC	---->>>>  The cause for the last GC occurrence 	-gccause
+
+GCC	---->>>>  The cause for the current GC occurrence	-gccause
+
+TT	---->>>>  Tenuring threshold. If copied this amount of times in young area (S0 ->S1, S1->S0), they are then moved to old area.	-gcnew
+
+MTT	---->>>>  Maximum Tenuring threshold. If copied this amount of times inside young arae, then they are moved to old area.	-gcnew
+
+DSS	---->>>>  Adequate size of survivor in KB 	-gcnew

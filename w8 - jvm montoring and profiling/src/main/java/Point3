@@ -1,0 +1,48 @@
+
+There are % kinds of GC Types that affects the performance of the garbage collection , namely :-
+TYPES : GC : COMMAND LINE SWITCH TO USE
+Serial GC	-XX:+UseSerialGC	 
+Parallel GC	-XX:+UseParallelGC -XX:ParallelGCThreads=value	 
+Parallel Compacting GC	-XX:+UseParallelOldGC	 
+The Concurrent Mark Sweep (CMS) C GC	-XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=value -XX:+UseCMSInitiatingOccupancyOnly	 
+G1	GC  -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC	In JDK 6, these two options must be used together.
+
+TO find out which GC is Running :
+C:\Program Files\Java\jdk1.7.0_51\bin>java -XX:+PrintCommandLineFlags -version
+-XX:InitialHeapSize=65343872 -XX:MaxHeapSize=1045501952 -XX:+PrintCommandLineFla
+gs -XX:+UseCompressedOops -XX:-UseLargePagesIndividualAllocation -XX:+UseParalle
+lGC
+java version "1.7.0_51"
+Java(TM) SE Runtime Environment (build 1.7.0_51-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)
+
+categorizartion :
+
+There are five GC types for Oracle JVM. However, if not JDK 7, 
+one among Parallel GC, Parallel Compacting GC and CMS GC should be selected. 
+There is no principle or rule to decide which one to select.
+If so, how can we select one? The most recommended way is to apply all three.
+However, one thing is clear - CMS GC is faster than other Parallel GCs. 
+At this time, if so, just apply CMS GC. However, CMS GC is not always faster.
+Generally, Full GC of CMS GC is fast, however, when concurrent mode failure occurs,
+ it is slower than other Parallel GCs.
+
+Concurrent mode failure:
+The biggest difference between Parallel GC and CMS GC is the compaction task. 
+The compaction task is to remove memory fragmentation by compacting memory in order to remove 
+the empty space between allocated memory areas.
+In the Parallel GC type, the compaction is executed whenever Full GC is executed,
+taking too much time. However, after executing Full GC, memory can be allocated in a faster way 
+since the next memory can be allocated sequentially.
+
+On the contrary, CMS GC does not accompany compaction. Therefore, the CMS GC is executed faster.
+However, when compaction is not executed, some empty spaces are generated in the memory as before 
+executing Disk Defragmenter. Therefore, there may be no space for large objects. 
+For example, 300 MB is left in the Old area, but some 10 MB objects cannot be sequentially saved in the area. 
+In this case, "Concurrent mode failure" warning occurs and compaction is executed. 
+However, if CMS GC is used, it takes a longer time to execute compaction than other Parallel GCs.
+In conclusion, best GC type depends entirely on the practical needs of the system being implemented.
+
+Each system requires its proper GC type, so you need to find the best GC type for your system.
+If you are running multiple servers, the best option would be to set the same options for each of two servers,
+add the -verbosegc option, and then analyze the result.

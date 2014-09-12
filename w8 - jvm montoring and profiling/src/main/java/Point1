@@ -1,0 +1,31 @@
+The initial and maximum heap space in a given application can be set by:
+
+-Xms<size>        set initial Java heap size
+-Xmx<size>        set maximum Java heap size
+-Xss<size>        set java thread stack size
+
+For example, we can set minimum heap to 64 MB and maximum heap 256 MB for a Java program HelloWorld.
+
+java -Xms64m -Xmx256m HelloWorld
+
+
+
+Factors :
+1)The maximum heap size that can be set depends entirely on the environment: for most 32-bit systems, 
+the maximum amount of heap space that can be requested, 
+regardless of available memory, is in the 2GiB range. 
+The largest heap on a 64-bit system is "really big". 
+Also, you are practically limited by physical memory as well, 
+since the heap is managed by the JVM and we don't want a lot of swapping going on to the disk.
+
+2)Now, in the usual case,we dont consider setting -Xms. 
+Set -Xmx to whatever value the application needs (observe, to find out). 
+JVM increases the size of memory pools when it needs to, and decreases them accordingly. 
+Just make sure, we don't get OutOfMemoryErrors. And then, look into the application for 
+memory bottlenecks (like, for example full GC's, or long stop-the-world phase),
+and size the pools and/or configure the GC if you need to.
+
+3)For server environments, we typically set -Xms and -Xmx to the same value: 
+this will fix the size of the heap at a certain size and the garbage collector has 
+less work to do because the heap will never have to be re-sized.
+
