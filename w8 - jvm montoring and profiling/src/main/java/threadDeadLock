@@ -1,0 +1,16 @@
+For the Thread DeadLock scenario:
+The assignment 6( COncurrency assignment) was made to read 
+to call two trading thread waiting
+for a synchronised object locked by the other thread,
+hence thread deadlock occured: 
+------------------------OUTPUT---------------
+log4j:ERROR Could not find value for key log4j.appender.file
+log4j:ERROR Could not instantiate appender named "file".
+2014-09-12 09:33:30 INFO  ClassPathXmlApplicationContext:513 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4c282f55: startup date [Fri Sep 12 09:33:30 IST 2014]; root of context hierarchy
+2014-09-12 09:33:30 INFO  XmlBeanDefinitionReader:316 - Loading XML bean definitions from class path resource [spring_config.xml]
+2014-09-12 09:33:31 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from class path resource [trading.properties]
+2014-09-12 09:33:52 INFO  Trader:65 - Client [name=A, stocksUnitsDemanded=StockUnits [numberOfStocks=450, company=TATA]]
+2014-09-12 09:33:52 INFO  Trader:65 - Client [name=B, stocksUnitsDemanded=StockUnits [numberOfStocks=300, company=TATA]]
+---- the thread executors simply run and does not exits
+-------------------------------------------------
+The scenario is also depicted in the threadDeadLock.PNG

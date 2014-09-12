@@ -1,0 +1,15 @@
+For the Out Of memory scenario:
+The assignment 6( collection assignment) was made to read 
+1Gb of csv file where as the max Heap space was "-Xmx512m"
+hence an out of memory occured : 
+------------------------OUTPUT---------------
+Sep 12, 2014 9:18:45 AM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh
+INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@454cf1b9: startup date [Fri Sep 12 09:18:44 IST 2014]; root of context hierarchy
+Sep 12, 2014 9:18:45 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [spring_config.xml]
+Sep 12, 2014 9:18:47 AM org.springframework.beans.factory.config.PropertyPlaceholderConfigurer loadProperties
+INFO: Loading properties file from class path resource [utilConstants.properties]
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+	at main.Main.main(Main.java:26)
+-------------------------------------------------
+The scenario is also depicted in the OutofMemory.PNG
