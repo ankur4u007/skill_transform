@@ -99,4 +99,17 @@
 	  <constructor-arg value="true" /> 
 	</bean>
 
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${sendmail.host}" />
+		<property name="port" value="${sendmail.port}" />
+		<property name="username" value="${sendmail.username}" />
+		<property name="password" value="${sendmail.password}" /> 
+		<property name="javaMailProperties">
+	            <props>
+	                <prop key="mail.smtp.ssl.trust">${sendmail.smtp.ssl.trust}</prop>
+	                <prop key="mail.smtp.starttls.enable">${sendmail.smtp.starttls}</prop>                                
+	                <prop key="mail.smtp.auth">${sendmail.smtp.auth}</prop>
+	            </props>
+		</property>
+	</bean>
 </beans>

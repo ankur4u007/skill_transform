@@ -50,5 +50,6 @@ are only catching the FlatFileParseException which occurs in the given csv file 
 empid = 20 as the date in not in the proper format, hence the record does not get integrated in the DB, 
 however the next record with empid = 21 does gets inserted into the DB) and proceeds with 
 the program execution.
-There is also a mail listener present which aims at informing the users throgh a mail once the file 
-integration is done.
+There is also a mail tasklet(SendMailTasklet) present which aims at informing the users through a mail once the file 
+integration is done.The mail tasklet uses the Send mail service to send the mail( the mailing properties are configured in 
+the SpringBacthConstants.properties file)

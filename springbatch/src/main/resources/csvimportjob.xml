@@ -12,15 +12,18 @@
     <import resource="classpath:springContext.xml" />
 
     <job id="employeeCSVImportJOB" xmlns="http://www.springframework.org/schema/batch">
-        <step id="importCSVStep">
+        <step id="importCSVStep" next="sendMailStep">
             <tasklet>
                 <chunk reader="employeeReader" writer="employeeWriter" commit-interval="5" skip-limit="10">
-                <skippable-exception-classes>
-					<include class="org.springframework.batch.item.file.FlatFileParseException" />
-				</skippable-exception-classes>
-			</chunk>
+	                <skippable-exception-classes>
+						<include class="org.springframework.batch.item.file.FlatFileParseException" />
+					</skippable-exception-classes>
+				</chunk>
             </tasklet>
         </step>
+        <step id="sendMailStep">
+    		<tasklet ref="sendmailtasklet" />
+  		</step>
     </job>
 
 </beans>
