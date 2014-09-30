@@ -1,0 +1,13 @@
+here we show case two types of jms send and receive mechanism:-
+
+1) send and receive in the same program 
+this is done by the MessageSenderAndReceiver which first sends the message to the JMS queue named
+"TestQueue" and then retreives the message from it and displays on the logger
+it can be run by simply running the class file MessageSenderAndReceiver.java
+
+2) we configured one JMS LIstener using the spring jms:listener-container 
+which listens for the messages put on to the queue "TestQueue" and consumes it
+this can be run by simply initializing the spring configurations
+and by running the main application(Main.java)
+
+Also attached is the activemq.png snapshot showing the messages sent and consumed on the Queue.

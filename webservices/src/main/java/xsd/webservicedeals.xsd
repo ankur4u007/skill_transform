@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+ <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+ 				xmlns="http://webservices/beans" 
+ 				xmlns:account="http://beans.webservices" 
+ 				targetNamespace="http://webservices/beans/webservice" 
+ 				elementFormDefault="qualified">  
+ 				
+      <xsd:import namespace="http://webservices/beans/createDeals" schemaLocation="createdeals.xsd"/>  
+      <xsd:import namespace="http://webservices/beans/getDeals" schemaLocation="getdeals.xsd"/>  
+      
+ </xsd:schema>   
