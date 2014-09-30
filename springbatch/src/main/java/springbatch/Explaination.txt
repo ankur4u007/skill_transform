@@ -1,0 +1,54 @@
+This Spring Batch project is aimed at 
+1) reading a csv file
+2) processing the file(mapping the properties automatically using the spring BeanWrapperFieldSetMapper)
+3) writing/updating the file to db
+4) skipping up to 10 error records in the file
+5) a mailing listener that sends out the mail once the process of integration is completed
+
+First we create a JOB Launcher and associate Job repository with it as :
+
+    <!-- Job Launcher: creates the job and the job state before launching it -->
+    <bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+        <property name="jobRepository" ref="jobRepository" />
+    </bean>
+    
+    and 
+    
+      <bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+        <property name="transactionManager" ref="transactionManager" />
+    </bean>
+ 
+Also the database tables need to be conigure for spring job batches hence the scripts are run
+on the database tables during the initialisation process using the following :
+
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="org/springframework/batch/core/schema-drop-mysql.sql" />
+        <jdbc:script location="org/springframework/batch/core/schema-mysql.sql" />
+    </jdbc:initialize-database>
+    
+All the database connection paramters are defined in the property file "springBatchConstants.properties"
+
+Once all the basic job set up is done we create a job in form of bean in the xml file "csvimportjob.xml" as:
+
+	job id="employeeCSVImportJOB" xmlns="http://www.springframework.org/schema/batch">
+        <step id="importCSVStep">
+            <tasklet>
+                <chunk reader="employeeReader" writer="employeeWriter" commit-interval="5" skip-limit="10">
+                <skippable-exception-classes>
+					<include class="org.springframework.batch.item.file.FlatFileParseException" />
+				</skippable-exception-classes>
+			</chunk>
+            </tasklet>
+        </step>
+    </job>
+    
+Hence the reader and the writer is assigned to the job which reads the csv file
+and writes the data to the database using the jdbc template created in the SpringContext.xml file
+We have also configured the Skip listeners whose sole purposes are to 
+skip the integration of the current record in case of exception ( in this case we 
+are only catching the FlatFileParseException which occurs in the given csv file for
+empid = 20 as the date in not in the proper format, hence the record does not get integrated in the DB, 
+however the next record with empid = 21 does gets inserted into the DB) and proceeds with 
+the program execution.
+There is also a mail listener present which aims at informing the users throgh a mail once the file 
+integration is done.

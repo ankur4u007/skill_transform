@@ -17,7 +17,7 @@ import com.blog.samples.webservices.accountservice.AccountDetailsResponse;
 @Endpoint
 public class DealServiceEndPoint {
     private static final String TARGET_NAMESPACE_GET = "http://webservices/beans/getDeals";
-    private static final String TARGET_NAMESPACE_CREATE = "http://webservices/beans/createDeals";
+    private static final String TARGET_NAMESPACE = "http://webservices/beans/createDeals";
     @Autowired
     private AccountService accountService_i;
 
