@@ -1,5 +1,6 @@
 package webservices.services.dealservice;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -40,8 +41,10 @@ public class DealServiceEndPoint extends AbstractServiceEndPoint {
 
     @Override
     protected List<Deal> getResults(final GetDealsRequest request) throws DatatypeConfigurationException {
+	final Date date = request.getMaturityDate() == null ? null : request.getMaturityDate().toGregorianCalendar()
+		.getTime();
 	final List<DealBO> dealBOList = dealService.getDealsByParameters(request.getFacilityId(),
-		request.getDrawDownId(), request.getMaturityDate().toGregorianCalendar().getTime());
+		request.getDrawDownId(), date);
 	return ResponseBuilder.builldResponseFromBOList(dealBOList);
 
     }

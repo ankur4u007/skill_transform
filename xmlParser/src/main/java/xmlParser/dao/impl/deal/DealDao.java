@@ -29,7 +29,7 @@ public class DealDao extends AbstractDao<Integer, Deal> implements IDealDao {
     public Deal findByDrawDownId(final int drawDownId) {
 	final Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Deal.class);
 	criteria.createAlias("facilityList", "facility").createAlias("facility.drawDownList", "drawDown")
-		.add(Restrictions.eq("drawDown.id", drawDownId));
+	.add(Restrictions.eq("drawDown.id", drawDownId));
 	return (Deal) criteria.uniqueResult();
     }
 
@@ -43,12 +43,12 @@ public class DealDao extends AbstractDao<Integer, Deal> implements IDealDao {
     @SuppressWarnings("unchecked")
     public List<Deal> findByParameters(final Integer facilityId, final Integer drawDownId, final Date maturityDate) {
 	final Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Deal.class);
-	if (facilityId != null) {
-	    criteria.createAlias("facilityList", "facility").add(Restrictions.eq("facility.id", facilityId));
+	criteria.createAlias("facilityList", "facility");
+	if (facilityId != null && facilityId != 0) {
+	    criteria.add(Restrictions.eq("facility.id", facilityId));
 	}
-	if (drawDownId != null) {
-	    criteria.createAlias("facilityList", "facility").createAlias("facility.drawDownList", "drawDown")
-	    .add(Restrictions.eq("drawDown.id", drawDownId));
+	if (drawDownId != null && drawDownId != 0) {
+	    criteria.createAlias("facility.drawDownList", "drawDown").add(Restrictions.eq("drawDown.id", drawDownId));
 	}
 	if (maturityDate != null) {
 	    criteria.add(Restrictions.eq("maturityDate", maturityDate));

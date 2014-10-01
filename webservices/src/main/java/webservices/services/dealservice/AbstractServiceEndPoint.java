@@ -15,9 +15,7 @@ public abstract class AbstractServiceEndPoint {
     public static final String ERROR = "ERROR";
 
     protected void checkGetRequest(final GetDealsRequest request) {
-	Preconditions.checkNotNull(request.getFacilityId(), "FacilityId cant be null");
-	Preconditions.checkNotNull(request.getDrawDownId(), "DrawDownId cant be null");
-	Preconditions.checkNotNull(request.getMaturityDate(), "MaturityDate cant be null");
+	Preconditions.checkNotNull(request, "Request cant be null");
     }
 
     protected GetDealsResponse processGetRequest(final GetDealsRequest request) {
