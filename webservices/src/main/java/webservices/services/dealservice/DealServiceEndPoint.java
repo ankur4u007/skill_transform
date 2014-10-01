@@ -2,9 +2,9 @@ package webservices.services.dealservice;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.xml.datatype.DatatypeConfigurationException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -15,7 +15,7 @@ import webservices.beans.getdeals.GetDealsRequest;
 import webservices.beans.getdeals.GetDealsResponse;
 import webservices.responsebuilder.ResponseBuilder;
 import xmlParser.bo.DealBO;
-import xmlParser.service.deal.DealService;
+import xmlParser.service.deal.IDealService;
 
 /**
  * The Class DealService.
@@ -25,8 +25,8 @@ public class DealServiceEndPoint extends AbstractServiceEndPoint {
     private static final String TARGET_NAMESPACE_GET = "http://webservices/beans/getDeals";
     private static final String TARGET_NAMESPACE_CREATE = "http://webservices/beans/createDeals";
 
-    @Autowired
-    private DealService dealService;
+    @Resource(name = "dealservice")
+    private IDealService dealService;
 
     /**
      *

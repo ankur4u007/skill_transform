@@ -9,13 +9,14 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx 
         http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <context:annotation-config />
  	<context:component-scan base-package="xmlParser" />
  	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>hibernateProps.properties</value>
-				<value>databaseProps.properties</value>
-				<value>xmlfileProps.properties</value>
+				<value>classpath:hibernateProps.properties</value>
+				<value>classpath:databaseProps.properties</value>
+				<value>classpath:xmlfileProps.properties</value>
 			</list>
 		</property>
 	</bean>
