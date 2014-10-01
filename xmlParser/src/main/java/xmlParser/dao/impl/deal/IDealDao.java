@@ -19,4 +19,5 @@ public interface IDealDao extends IAbstractDao<Integer, Deal> {
 
     List<Deal> findByMaturityDate(final Date maturityDate);
 
+    List<Deal> findByParameters(final Integer facilityId, final Integer drawDownId, final Date maturityDate);
 }

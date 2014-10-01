@@ -72,4 +72,9 @@ public class DealService implements IDealService {
     public List<DealBO> getDealsByMaturityDate(final Date maturityDate) {
 	return BOBuilder.buildDealBOListFromDomainObjectList(dealDao.findByMaturityDate(maturityDate));
     }
+
+    public List<DealBO> getDealsByParameters(final Integer facilityId, final Integer drawDownId, final Date maturityDate) {
+	return BOBuilder.buildDealBOListFromDomainObjectList(dealDao.findByParameters(facilityId, drawDownId,
+		maturityDate));
+    }
 }

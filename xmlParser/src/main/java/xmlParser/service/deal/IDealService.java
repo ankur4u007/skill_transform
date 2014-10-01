@@ -26,4 +26,6 @@ public interface IDealService {
     List<DealBO> getAllDeals();
 
     List<DealBO> getDealsByMaturityDate(Date maturityDate);
+
+    List<DealBO> getDealsByParameters(final Integer facilityId, final Integer drawDownId, final Date maturityDate);
 }

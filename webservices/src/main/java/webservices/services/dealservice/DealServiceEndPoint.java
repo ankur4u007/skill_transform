@@ -1,4 +1,8 @@
-package com.blog.samples.services.endpoints;
+package webservices.services.dealservice;
+
+import java.util.List;
+
+import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -6,38 +10,40 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import com.blog.samples.services.AccountService;
-import com.blog.samples.webservices.Account;
-import com.blog.samples.webservices.accountservice.AccountDetailsRequest;
-import com.blog.samples.webservices.accountservice.AccountDetailsResponse;
+import webservices.beans.getdeals.Deal;
+import webservices.beans.getdeals.GetDealsRequest;
+import webservices.beans.getdeals.GetDealsResponse;
+import webservices.responsebuilder.ResponseBuilder;
+import xmlParser.bo.DealBO;
+import xmlParser.service.deal.DealService;
 
 /**
  * The Class DealService.
  */
 @Endpoint
-public class DealServiceEndPoint {
+public class DealServiceEndPoint extends AbstractServiceEndPoint {
     private static final String TARGET_NAMESPACE_GET = "http://webservices/beans/getDeals";
-    private static final String TARGET_NAMESPACE = "http://webservices/beans/createDeals";
+    private static final String TARGET_NAMESPACE_CREATE = "http://webservices/beans/createDeals";
+
     @Autowired
-    private AccountService accountService_i;
+    private DealService dealService;
 
     /**
-     * Gets the account details.
      *
-     * @param accountNumber
-     *            the account number
-     * @return the account details
+     * @param request
+     * @return
      */
-    @PayloadRoot(localPart = "AccountDetailsRequest", namespace = TARGET_NAMESPACE)
-    public @ResponsePayload AccountDetailsResponse getAccountDetails(@RequestPayload final AccountDetailsRequest request) {
-	final AccountDetailsResponse response = new AccountDetailsResponse();
-	/* call Spring injected service implementation to retrieve account data */
-	final Account account = accountService_i.getAccountDetails(request.getAccountNumber());
-	response.setAccountDetails(account);
-	return response;
+    @PayloadRoot(localPart = "GetDealsRequest", namespace = TARGET_NAMESPACE_GET)
+    public @ResponsePayload GetDealsResponse getAccountDetails(@RequestPayload final GetDealsRequest request) {
+	return processGetRequest(request);
     }
 
-    public void setAccountService(final AccountService accountService_p) {
-	accountService_i = accountService_p;
+    @Override
+    protected List<Deal> getResults(final GetDealsRequest request) throws DatatypeConfigurationException {
+	final List<DealBO> dealBOList = dealService.getDealsByParameters(request.getFacilityId(),
+		request.getDrawDownId(), request.getMaturityDate().toGregorianCalendar().getTime());
+	return ResponseBuilder.builldResponseFromBOList(dealBOList);
+
     }
+
 }
