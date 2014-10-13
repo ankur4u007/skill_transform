@@ -60,7 +60,10 @@ public class DealService implements IDealService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void createDealsByBO(final DealBO dealBO) {
 	final Deal deal = DOBuilder.getDealDomainObjectFromBO(dealBO);
-	final Deal existingDeal = dealDao.findById(deal.getId());
+	Deal existingDeal = null;
+	if (deal.getId() != null) {
+	    existingDeal = dealDao.findById(deal.getId());
+	}
 	if (existingDeal != null) {
 	    dealDao.update(deal);
 	} else {

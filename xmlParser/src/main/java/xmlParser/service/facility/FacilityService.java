@@ -37,7 +37,10 @@ public class FacilityService implements IFacilityService {
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void createFacility(final Facility facilityToCreate) {
-	final Facility existingfacility = facilityDao.findById(facilityToCreate.getId());
+	Facility existingfacility = null;
+	if (facilityToCreate.getId() != null) {
+	    existingfacility = facilityDao.findById(facilityToCreate.getId());
+	}
 	if (existingfacility != null) {
 	    facilityDao.update(facilityToCreate);
 	} else {
