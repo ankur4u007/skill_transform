@@ -57,6 +57,23 @@ public class DealService implements IDealService {
 	}
     }
 
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void createDealsByBO(final DealBO dealBO) {
+	final Deal deal = DOBuilder.getDealDomainObjectFromBO(dealBO);
+	final Deal existingDeal = dealDao.findById(deal.getId());
+	if (existingDeal != null) {
+	    dealDao.update(deal);
+	} else {
+	    dealDao.create(deal);
+	}
+	if (deal.getFacilityList() != null) {
+	    for (final Facility facility : deal.getFacilityList()) {
+		facility.setDeal(deal);
+		facilityService.createFacility(facility);
+	    }
+	}
+    }
+
     public DealBO getDealByFacilityId(final int facilityId) {
 	return BOBuilder.buildDealBOFromDomainObject(dealDao.findByFacilityId(facilityId));
     }

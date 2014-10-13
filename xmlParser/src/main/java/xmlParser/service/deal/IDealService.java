@@ -17,6 +17,8 @@ public interface IDealService {
 
     void createDeals(List<Deal> dealToCreate);
 
+    void createDealsByBO(final DealBO dealBO);
+
     void createDealsByBOList(List<DealBO> dealListToCreate);
 
     DealBO getDealByFacilityId(int facilityId);

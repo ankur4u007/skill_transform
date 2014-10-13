@@ -31,10 +31,11 @@ public class ResponseBuilder {
 	Deal dealToReturn = null;
 	if (bo != null) {
 	    dealToReturn = new Deal();
+	    dealToReturn.setId(bo.getId());
 	    dealToReturn.setDescrption(bo.getDescrption());
 	    final GregorianCalendar matCal = new GregorianCalendar();
 	    matCal.setTime(bo.getMaturityDate());
-	    dealToReturn.setMaturityDate(DatatypeFactory.newInstance().newXMLGregorianCalendar());
+	    dealToReturn.setMaturityDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(matCal));
 	    final GregorianCalendar startCal = new GregorianCalendar();
 	    startCal.setTime(bo.getStartDate());
 	    dealToReturn.setStartDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(startCal));
@@ -50,6 +51,7 @@ public class ResponseBuilder {
 	    facilityListToReturn = new ArrayList<Facility>();
 	    for (final FacilityBO bo : facilityBOList) {
 		final Facility facility = new Facility();
+		facility.setId(bo.getId());
 		facility.setAmount(bo.getAmount());
 		final GregorianCalendar matCal = new GregorianCalendar();
 		matCal.setTime(bo.getMaturityDate());
@@ -70,6 +72,7 @@ public class ResponseBuilder {
 	    drawDownListToReturn = new ArrayList<DrawDown>();
 	    for (final DrawDownBO bo : drawDownBOList) {
 		final DrawDown drawDown = new DrawDown();
+		drawDown.setId(bo.getId());
 		drawDown.setAmount(bo.getAmount());
 		drawDown.setDescription(bo.getDescription());
 		drawDownListToReturn.add(drawDown);

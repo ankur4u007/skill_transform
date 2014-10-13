@@ -28,7 +28,12 @@ public class DrawDownService implements IDrawDownService {
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void createDrawDown(final DrawDown drawDownToCreate) {
-	drawDownDao.create(drawDownToCreate);
+	final DrawDown existingDrawDown = drawDownDao.findById(drawDownToCreate.getId());
+	if (existingDrawDown != null) {
+	    drawDownDao.update(drawDownToCreate);
+	} else {
+	    drawDownDao.create(drawDownToCreate);
+	}
     }
 
     public List<DrawDownBO> getAllDrawDowns() {

@@ -17,7 +17,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  *
  */
 public abstract class AbstractDao<PK extends Serializable, T> extends HibernateDaoSupport implements
-	IAbstractDao<PK, T> {
+IAbstractDao<PK, T> {
 
     private final Class<T> domainObj;
 
@@ -36,6 +36,10 @@ public abstract class AbstractDao<PK extends Serializable, T> extends HibernateD
 
     }
 
+    public void update(final T objToUpdate) {
+	getHibernateTemplate().update(objToUpdate);
+    }
+
     public void delete(final T objToDelete) {
 	getHibernateTemplate().delete(objToDelete);
 
@@ -49,6 +53,11 @@ public abstract class AbstractDao<PK extends Serializable, T> extends HibernateD
 
     public void deleteAndFlush(final T objToDelete) {
 	getHibernateTemplate().delete(objToDelete);
+	getHibernateTemplate().flush();
+    }
+
+    public void updateAndFlush(final T objToUpdate) {
+	getHibernateTemplate().update(objToUpdate);
 	getHibernateTemplate().flush();
     }
 

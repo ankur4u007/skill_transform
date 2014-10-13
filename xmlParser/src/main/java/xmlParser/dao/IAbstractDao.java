@@ -14,9 +14,13 @@ public abstract interface IAbstractDao<PK extends Serializable, T> {
 
     void delete(T objToDelete);
 
+    void update(T objToUpdate);
+
     void createAndFlush(T objToCreate);
 
     void deleteAndFlush(T objToDelete);
+
+    void updateAndFlush(final T objToUpdate);
 
     T findById(PK key);
 

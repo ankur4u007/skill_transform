@@ -16,7 +16,7 @@
       <xsd:element name="CreateDealsResponse">  
            <xsd:complexType>  
                 <xsd:sequence>  
-                     <xsd:element name="status" type="xsd:string"  minOccurs="0" maxOccurs="unbounded"/>
+                     <xsd:element name="status" type="xsd:string"  minOccurs="0"/>
                      <xsd:element name="responseList" type="ResponseList" minOccurs="0" maxOccurs="unbounded"/>
                 </xsd:sequence>  
            </xsd:complexType>  
@@ -24,36 +24,36 @@
       
       <xsd:complexType name="ResponseList">  
            <xsd:sequence>  
-                <xsd:element name="errorMessage" type="xsd:string"  minOccurs="0" maxOccurs="unbounded"/>  
-                <xsd:element name="errorDeal" type="deal"  minOccurs="0" maxOccurs="unbounded"/>  
+                <xsd:element name="errorMessage" type="xsd:string"  minOccurs="0"/>  
+                <xsd:element name="errorDeal" type="deal"  minOccurs="0" />  
            </xsd:sequence>  
       </xsd:complexType>  
 	
 	  <xsd:complexType name="deal">
 	    <xsd:sequence>
-	      <xsd:element name="id" type="xsd:int" minOccurs="0"/>
-	      <xsd:element name="descrption" type="xsd:string" minOccurs="0"/>
-	      <xsd:element name="startDate" type="xsd:dateTime" minOccurs="0"/>
-	      <xsd:element name="maturityDate" type="xsd:dateTime" minOccurs="0"/>
-	      <xsd:element name="facilityList" type="facility" nillable="true" minOccurs="1" maxOccurs="unbounded"/>
+	      <xsd:element name="id" type="xsd:int" minOccurs="1"/>
+	      <xsd:element name="descrption" type="xsd:string" nillable="true" minOccurs="0"/>
+	      <xsd:element name="startDate" type="xsd:dateTime" minOccurs="1"/>
+	      <xsd:element name="maturityDate" type="xsd:dateTime" minOccurs="1"/>
+	      <xsd:element name="facilityList" type="facility" minOccurs="1" maxOccurs="unbounded"/>
 	    </xsd:sequence>
 	  </xsd:complexType>
 	
 	  <xsd:complexType name="facility">
 	    <xsd:sequence>
-	      <xsd:element name="amount" type="xsd:double" minOccurs="0"/>
-	      <xsd:element name="drawDownList" type="drawDown" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-	      <xsd:element name="id" type="xsd:int" minOccurs="0"/>
-	      <xsd:element name="maturityDate" type="xsd:dateTime" minOccurs="0"/>
-	      <xsd:element name="startDate" type="xsd:dateTime" minOccurs="0"/>
+	      <xsd:element name="amount" type="xsd:double" nillable="true" minOccurs="0"/>
+	      <xsd:element name="drawDownList" type="drawDown" minOccurs="1" maxOccurs="unbounded"/>
+	      <xsd:element name="id" type="xsd:int" minOccurs="1"/>
+	      <xsd:element name="maturityDate" type="xsd:dateTime" minOccurs="1"/>
+	      <xsd:element name="startDate" type="xsd:dateTime" minOccurs="1"/>
 	    </xsd:sequence>
 	  </xsd:complexType>
 	  
 	  <xsd:complexType name="drawDown">
 	    <xsd:sequence>
-	      <xsd:element name="amount" type="xsd:double" minOccurs="0"/>
-	      <xsd:element name="description" type="xsd:string" minOccurs="0"/>
-	      <xsd:element name="id" type="xsd:int" minOccurs="0"/>
+	      <xsd:element name="amount" type="xsd:double" nillable="true" minOccurs="0"/>
+	      <xsd:element name="description" type="xsd:string" nillable="true" minOccurs="0"/>
+	      <xsd:element name="id" type="xsd:int" minOccurs="1"/>
 	    </xsd:sequence>
   </xsd:complexType>
  </xsd:schema>  

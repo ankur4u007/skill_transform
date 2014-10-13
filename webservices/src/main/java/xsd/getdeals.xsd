@@ -8,9 +8,9 @@
       <xsd:element name="GetDealsRequest">  
            <xsd:complexType>  
                 <xsd:sequence>  
-                     <xsd:element name="facilityId" type="xsd:int" nillable="true" minOccurs="0"/>  
-                     <xsd:element name="drawDownId" type="xsd:int" nillable="true" minOccurs="0" />
-                     <xsd:element name="maturityDate" type="xsd:date" nillable="true" minOccurs="0"/>
+                     <xsd:element name="facilityId" type="xsd:int" minOccurs="0"/>  
+                     <xsd:element name="drawDownId" type="xsd:int" minOccurs="0" />
+                     <xsd:element name="maturityDate" type="xsd:dateTime" minOccurs="0"/>
                 </xsd:sequence>  
            </xsd:complexType>  
       </xsd:element>  
