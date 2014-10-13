@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>  
   <beans xmlns="http://www.springframework.org/schema/beans"  
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-            xmlns:context="http://www.springframework.org/schema/context"  
-            xmlns:sws="http://www.springframework.org/schema/web-services"  
+            xmlns:context="http://www.springframework.org/schema/context" 
+            xmlns:p="http://www.springframework.org/schema/p" 
+            xmlns:oxm="http://www.springframework.org/schema/oxm"
+            xmlns:sws="http://www.springframework.org/schema/web-services"
             xsi:schemaLocation="http://www.springframework.org/schema/beans  
                                      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
                                     http://www.springframework.org/schema/web-services  
-                                    http://www.springframework.org/schema/web-services/web-services-2.0.xsd  
+                                    http://www.springframework.org/schema/web-services/web-services-2.0.xsd 
+                                    http://www.springframework.org/schema/oxm 
+                                    http://www.springframework.org/schema/oxm/spring-oxm.xsd 
                                      http://www.springframework.org/schema/context  
-                                     http://www.springframework.org/schema/context/spring-context-3.0.xsd"> 
+                                     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
        <import resource="classpath:springContext.xml" />   
        <sws:annotation-driven />   
        <context:component-scan base-package="webservices" />
-
- 
-       
+	 
        <!--  
             Our test service bean  
        -->  
@@ -33,5 +35,23 @@
       <property name="portTypeName" value="DealService"/>  
       <property name="serviceName" value="DealService" />  
       <property name="locationUri" value="/endpoints"/>  
-    </bean>  
+    </bean>
+	
+	<sws:interceptors>
+        <bean class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+            <description>
+                This interceptor validates both incoming and outgoing message contents according to the 'echo.xsd' XML
+                Schema file.
+            </description>
+            <property name="schema" value="classpath:xsd/webservicedeals.xsd"/>
+            <property name="validateRequest" value="true"/>
+            <property name="validateResponse" value="false"/>
+        </bean>
+        <bean class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor">
+            <description>
+                This interceptor logs the message payload.
+            </description>
+        </bean>
+    </sws:interceptors> 
+	
   </beans>  

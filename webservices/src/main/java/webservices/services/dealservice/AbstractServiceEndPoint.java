@@ -13,6 +13,7 @@ import com.google.common.base.Preconditions;
 public abstract class AbstractServiceEndPoint {
 
     public static final String ERROR = "ERROR";
+    public static final String SUCCESS = "SUCCESS";
 
     protected void checkGetRequest(final GetDealsRequest request) {
 	Preconditions.checkNotNull(request, "Request cant be null");
@@ -23,6 +24,7 @@ public abstract class AbstractServiceEndPoint {
 	try {
 	    checkGetRequest(request);
 	    response.getDeal().addAll(getResults(request));
+	    response.setStatus(SUCCESS);
 	} catch (final Exception ae) {
 	    response.setStatus(ERROR);
 	    response.setErrorMessage(ae.getMessage());
