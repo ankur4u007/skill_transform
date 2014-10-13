@@ -1,0 +1,10 @@
+1)The Wsdl gets deployed using DefaultWsdl11Definition xsds location which imports all the xsds onto one location
+and publish at following url:
+http://localhost:8080/webservices/endpoints/DealService.wsdl
+
+2)input validations and error conditions are managed through :
+PayloadValidatingInterceptor and google Preconditions api
+
+3) The webservices are mapped to the endpoint using annotations
+and configured in spring using 
+<sws:annotation-driven /> and <context:component-scan base-package="webservices" />
